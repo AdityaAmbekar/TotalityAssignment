@@ -9,6 +9,7 @@ import UIKit
 
 class HalfViewController: UIViewController {
     
+    //adding two views one backdrop and other containing data
     lazy var backdropView: UIView = {
         let bdView = UIView(frame: self.view.bounds)
         bdView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -42,7 +43,6 @@ class HalfViewController: UIViewController {
         
         pageController = NextViewController()
         addChild(pageController)
-        //        pageController.view.translatesAutoresizingMaskIntoConstraints = false
         
         menuView.addSubview(pageController.view)
         view.backgroundColor = .clear
@@ -58,16 +58,20 @@ class HalfViewController: UIViewController {
         backdropView.addGestureRecognizer(tapGesture)
     }
     
-    @objc func goPrevPage(_:AnyObject) {
+    // Method to go to next page
+    @objc func goNextPage(_:AnyObject) {
             let cur = pageController.viewControllers![0]
             let p = pageController.pageViewController(self.pageController, viewControllerAfter: cur)
             self.pageController.setViewControllers([p!], direction: .forward, animated: true, completion: nil)
         }
     
+    // Method for xmark to dismiss the vc
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
 }
+
+//MARK: - TransitionDelagate method implementation
 
 extension HalfViewController: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

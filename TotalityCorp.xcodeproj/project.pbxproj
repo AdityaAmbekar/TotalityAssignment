@@ -22,6 +22,8 @@
 		48B522A925936BE600D10799 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B522A825936BE600D10799 /* NextViewController.swift */; };
 		48B522AE259374CC00D10799 /* BaseViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B522AD259374CC00D10799 /* BaseViewController2.swift */; };
 		48B522B6259374DF00D10799 /* BaseViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B522B5259374DF00D10799 /* BaseViewController3.swift */; };
+		48B522CC2593E94E00D10799 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B522CB2593E94E00D10799 /* Extensions.swift */; };
+		48B522D52593EB4700D10799 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B522D42593EB4700D10799 /* CustomProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		48B522A825936BE600D10799 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		48B522AD259374CC00D10799 /* BaseViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController2.swift; sourceTree = "<group>"; };
 		48B522B5259374DF00D10799 /* BaseViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController3.swift; sourceTree = "<group>"; };
+		48B522CB2593E94E00D10799 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		48B522D42593EB4700D10799 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,20 +117,10 @@
 		48B5224A259310D100D10799 /* TotalityCorp */ = {
 			isa = PBXGroup;
 			children = (
-				48B5224B259310D100D10799 /* AppDelegate.swift */,
-				48B5224D259310D100D10799 /* SceneDelegate.swift */,
-				48B5224F259310D100D10799 /* ViewController.swift */,
-				48B5227E259314CD00D10799 /* DetailsViewController.swift */,
-				48B52251259310D100D10799 /* Main.storyboard */,
-				48B52254259310D600D10799 /* Assets.xcassets */,
-				48B52256259310D600D10799 /* LaunchScreen.storyboard */,
+				48B522D32593E9CF00D10799 /* Views */,
+				48B522CA2593E92900D10799 /* Resources */,
+				48B522C92593E8E600D10799 /* Controllers */,
 				48B52259259310D600D10799 /* Info.plist */,
-				48B522862593168500D10799 /* CardTableViewCell.swift */,
-				48B5229B2593596600D10799 /* HalfViewController.swift */,
-				48B522A825936BE600D10799 /* NextViewController.swift */,
-				48B522A325936BAF00D10799 /* BaseViewController1.swift */,
-				48B522AD259374CC00D10799 /* BaseViewController2.swift */,
-				48B522B5259374DF00D10799 /* BaseViewController3.swift */,
 			);
 			path = TotalityCorp;
 			sourceTree = "<group>";
@@ -147,6 +141,42 @@
 				48B5226F259310D600D10799 /* Info.plist */,
 			);
 			path = TotalityCorpUITests;
+			sourceTree = "<group>";
+		};
+		48B522C92593E8E600D10799 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				48B5224F259310D100D10799 /* ViewController.swift */,
+				48B5227E259314CD00D10799 /* DetailsViewController.swift */,
+				48B522A825936BE600D10799 /* NextViewController.swift */,
+				48B5229B2593596600D10799 /* HalfViewController.swift */,
+				48B522A325936BAF00D10799 /* BaseViewController1.swift */,
+				48B522AD259374CC00D10799 /* BaseViewController2.swift */,
+				48B522B5259374DF00D10799 /* BaseViewController3.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		48B522CA2593E92900D10799 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				48B5224B259310D100D10799 /* AppDelegate.swift */,
+				48B5224D259310D100D10799 /* SceneDelegate.swift */,
+				48B522CB2593E94E00D10799 /* Extensions.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		48B522D32593E9CF00D10799 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				48B52251259310D100D10799 /* Main.storyboard */,
+				48B52256259310D600D10799 /* LaunchScreen.storyboard */,
+				48B522862593168500D10799 /* CardTableViewCell.swift */,
+				48B52254259310D600D10799 /* Assets.xcassets */,
+				48B522D42593EB4700D10799 /* CustomProgressView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +311,7 @@
 			files = (
 				48B522872593168500D10799 /* CardTableViewCell.swift in Sources */,
 				48B522B6259374DF00D10799 /* BaseViewController3.swift in Sources */,
+				48B522D52593EB4700D10799 /* CustomProgressView.swift in Sources */,
 				48B522A925936BE600D10799 /* NextViewController.swift in Sources */,
 				48B52250259310D100D10799 /* ViewController.swift in Sources */,
 				48B5224C259310D100D10799 /* AppDelegate.swift in Sources */,
@@ -288,6 +319,7 @@
 				48B522AE259374CC00D10799 /* BaseViewController2.swift in Sources */,
 				48B5229C2593596600D10799 /* HalfViewController.swift in Sources */,
 				48B522A425936BAF00D10799 /* BaseViewController1.swift in Sources */,
+				48B522CC2593E94E00D10799 /* Extensions.swift in Sources */,
 				48B5227F259314CD00D10799 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

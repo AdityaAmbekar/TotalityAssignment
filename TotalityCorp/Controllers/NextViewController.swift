@@ -45,11 +45,13 @@ class NextViewController: UIPageViewController {
         pages.append(vc2)
         pages.append(vc3)
         
+        //setting view controllers
         setViewControllers([pages[0]], direction: .forward, animated: false, completion: nil)
     }
     
 }
 
+//MARK: - Delegate and DataSource for UIPageController
 
 extension NextViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     

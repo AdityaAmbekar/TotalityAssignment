@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Class for first page
 class BaseViewController1: UIViewController {
     
     let view1: UIView = {
@@ -63,7 +64,7 @@ class BaseViewController1: UIViewController {
         button.backgroundColor = .green
         button.setTitle("NEXT", for: .normal)
         button.layer.cornerRadius = 40
-        button.addTarget(self, action: #selector(HalfViewController.goPrevPage(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(HalfViewController.goNextPage(_:)), for: .touchUpInside)
         return button
     }()
     

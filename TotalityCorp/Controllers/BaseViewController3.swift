@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Class for third page
 class BaseViewController3: UIPageViewController {
     
     let view0: UILabel = {
