@@ -15,6 +15,8 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
     private var downloadButtonX = CGFloat()
     private var downloadButtonY = CGFloat()
     
+    private var bottomofStack = CGFloat()
+    
     private let iconView: UIView = {
         let view = UIView();
         view.backgroundColor = .yellow
@@ -61,7 +63,7 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
         button.setTitle("READ MORE", for: .normal)
         button.titleLabel?.font = button.titleLabel?.font.withSize(13)
         button.setTitleColor(.green, for: .normal)
-
+        
         return button
     }()
     
@@ -78,7 +80,7 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
     private let firstView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
-        view.clipsToBounds = true
+        //        view.clipsToBounds = true
         return view
     }()
     
@@ -86,7 +88,7 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
     private let secondView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
-        view.clipsToBounds = true
+        //        view.clipsToBounds = true
         return view
     }()
     
@@ -142,6 +144,7 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
         button.isHidden = true
         button.layer.cornerRadius = 30
         button.imageView?.layer.cornerRadius = 30
+        button.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -156,6 +159,17 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
         
     }
     
+    @objc func cancelButtonPressed() {
+        
+        downloadButton.isHidden = false
+        progressBar.isHidden = true
+        cancelButton.isHidden = true
+        progressLabel.isHidden = true
+        
+        
+        
+    }
+    
     @objc func downloadButtonPressed() {
         
         downloadButton.isHidden = true
@@ -163,7 +177,18 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
         cancelButton.isHidden = false
         progressLabel.isHidden = false
         
+        UIView.animate(withDuration: 1, delay: 0,
+                       options: []) {
+
+            self.progressBar.frame.size.width -= 80
+            self.cancelButton.alpha = 1.0
+            self.view.layoutIfNeeded()
+            
+        } completion: { _ in
+        }
+        
         timer.invalidate()
+        progressLabel.text = "DOWNLOAD \n   30 MB"
         progressBar.progress = 0
         secondsPassed = 0
         
@@ -196,17 +221,17 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
         dismiss(animated: true, completion: nil)
     }
     
-//    init(iconViewX: CGFloat, iconViewY: CGFloat, downloadButtonX: CGFloat, downloadButtonY: CGFloat) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.iconViewX = iconViewX
-//        self.iconViewY = iconViewY
-//        self.downloadButtonX = downloadButtonX
-//        self.downloadButtonY = downloadButtonY
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    //    init(iconViewX: CGFloat, iconViewY: CGFloat, downloadButtonX: CGFloat, downloadButtonY: CGFloat) {
+    //        super.init(nibName: nil, bundle: nil)
+    //        self.iconViewX = iconViewX
+    //        self.iconViewY = iconViewY
+    //        self.downloadButtonX = downloadButtonX
+    //        self.downloadButtonY = downloadButtonY
+    //    }
+    //
+    //    required init?(coder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -231,26 +256,47 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
         view.addSubview(cancelButton)
         view.addSubview(playButton)
         
-        //Animating
-        startupAnimation()
     }
     
     func startupAnimation() {
         
-//        UIView.animateKeyframes(withDuration: 0.5, delay: 0,
-//                                options: [.layoutSubviews]) {
-//
-//            let inital = CGPoint(x: self.iconViewX, y: self.iconViewY)
-//            let final = self.iconView.center
-//
-//        } completion: { (_) in
-//            <#code#>
-//        }
-
+        UIView.animate(withDuration: 1, delay: 0,
+                       options: []) {
+            
+            self.appNameLabel.alpha = 1.0
+            self.appNameLabel.transform = CGAffineTransform(translationX: -40, y: 0)
+            
+            
+        } completion: { _ in
+            
+            UIView.animate(withDuration: 1, delay: 0,
+                           options: []) {
+                
+                self.descriptionLabel.alpha = 1.0
+                
+                self.closeButton.alpha = 1.0
+                self.closeButton.transform = CGAffineTransform(translationX: 0, y: -30)
+                
+                self.secondView.alpha = 1.0
+                self.secondView.transform = CGAffineTransform(translationX: -(self.view.width), y: 0)
+                
+            } completion: { _ in
+                self.readMoreButton.alpha = 1.0
+            }
+            
+            UIView.animate(withDuration: 0.8, delay: 0,
+                           options: []) {
+                
+                self.firstView.alpha = 1.0
+                self.firstView.transform = CGAffineTransform(translationX: -(self.view.width), y: 0)
+            } completion: { _ in
+            }
+            
+        }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         topStackView.frame = CGRect(x: 20,
                                     y: 20,
@@ -261,19 +307,23 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
                                 y: topStackView.top + 30,
                                 width: 100, height: 100)
         
-        appNameLabel.frame = CGRect(x: iconView.right + 20,
+        appNameLabel.alpha = 0.0
+        appNameLabel.frame = CGRect(x: iconView.right + 60,
                                     y: topStackView.top + 30,
                                     width: view.width - 215,
                                     height: 80)
         
-        closeButton.frame = CGRect(x: appNameLabel.right + 10 ,
-                                   y: topStackView.top + 45,
+        closeButton.alpha = 0.0
+        closeButton.frame = CGRect(x: appNameLabel.right - 20 ,
+                                   y: topStackView.top + 75,
                                    width: 30, height: 30)
         
+        descriptionLabel.alpha = 0.0
         descriptionLabel.frame = CGRect(x: view.left + 20,
                                         y: topStackView.bottom - 70,
                                         width: view.width - 40, height: view.height / 3 - 150)
         
+        readMoreButton.alpha = 0.0
         readMoreButton.frame = CGRect(x: 0,
                                       y: descriptionLabel.bottom - 30,
                                       width: view.width,
@@ -283,40 +333,55 @@ class DetailsViewController: UIViewController, UIAdaptivePresentationControllerD
                                       y: readMoreButton.bottom + 30,
                                       width: view.width, height: view.height / 2)
         
-        firstView.frame = CGRect(x: 10,
-                                 y: 10,
+        firstView.alpha = 0.0
+        firstView.frame = CGRect(x: 10 + view.width,
+                                 y: imageStackView.top + 10,
                                  width: imageStackView.width / 2 - 15,
                                  height: imageStackView.height - 20)
-        secondView.frame = CGRect(x: firstView.width + 20,
-                                 y: 10,
-                                 width: imageStackView.width / 2 - 15,
-                                 height: imageStackView.height - 20)
+        
+        secondView.alpha = 0.0
+        secondView.frame = CGRect(x: firstView.width + 20 + view.width,
+                                  y: imageStackView.top + 10,
+                                  width: imageStackView.width / 2 - 15,
+                                  height: imageStackView.height - 20)
+        
+        bottomofStack = imageStackView.bottom
         
         progressBar.frame = CGRect(x: 20,
-                                      y: imageStackView.bottom + 20,
-                                      width: 2 * (view.width / 2) - 120,
-                                      height: 80)
+                                   y: imageStackView.bottom + 20,
+                                   width: view.width - 40,
+                                   height: 80)
         
         progressLabel.frame = CGRect(x: 20,
-                                      y: imageStackView.bottom + 20,
-                                      width: 2 * (view.width / 2) - 120,
-                                      height: 80)
-
+                                     y: imageStackView.bottom + 20,
+                                     width: 2 * (view.width / 2) - 120,
+                                     height: 80)
+        
         downloadButton.frame = CGRect(x: 20,
                                       y: imageStackView.bottom + 20,
                                       width: view.width - 40,
                                       height: 80)
         
+        cancelButton.alpha = 0.0
         cancelButton.frame = CGRect(x: progressBar.right + 10,
-                                      y: imageStackView.bottom + 30,
-                                      width: 50,
-                                      height: 50)
+                                    y: imageStackView.bottom + 30,
+                                    width: 50,
+                                    height: 50)
         
         playButton.frame = CGRect(x: 20,
-                                      y: imageStackView.bottom + 20,
-                                      width: view.width - 40,
-                                      height: 80)
+                                  y: imageStackView.bottom + 20,
+                                  width: view.width - 40,
+                                  height: 80)
+        
+        
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        startupAnimation()
+        
+    }
+    
 }
 
